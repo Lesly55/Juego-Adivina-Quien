@@ -1,0 +1,141 @@
+import java.util.Random;
+import java.util.Scanner;
+public class Programa {
+	Random random = new Random();
+	static String[][] matrizPersonajes = new String[10][5];
+	static String[] preguntas = new String[]{"1.- ¿Es bellako/a?", "2.- ¿Toma kitty chelas?", "3.- ¿Es fan de Chayan?", "4.- ¿Le gusta el mambo?"};
+	static int pRandom;
+	static String nomElejido;
+
+	public static void main(String[] args) {
+		String jugar, numP, respuesta;
+		int contador, pregunta;
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Bienvenido al juego Adivina Quien");
+		System.out.println("¿Quieres jugar una partida? Si o No");
+		jugar = (input.nextLine()).toLowerCase();
+		
+		while(jugar.equalsIgnoreCase("si")) {
+			CrearPersonajesNR();
+			pRandom = (int) Math.floor(Math.random() * 10);
+			nomElejido = matrizPersonajes[pRandom][0].replace(":","");
+			
+			System.out.println("Los personajes son: ");
+			contador = 0;
+			while (contador < 3) {
+				ImprimirPersonajes();
+				ImprimirPreguntas();
+				System.out.println("Elije el numero de pregunta que me quieres hacer: ");
+				numP = input.nextLine();
+				pregunta = Integer.parseInt(numP);
+				
+				System.out.println((matrizPersonajes[pRandom][pregunta]).replace(",", ""));
+				eliminarPersonajes(pregunta);
+				contador++;
+			}
+			
+			System.out.println("¿Que personaje crees que tengo?");
+			respuesta = (input.nextLine()).toLowerCase();
+			
+			if(respuesta.equalsIgnoreCase(nomElejido)) {
+				System.out.println("Acertaste! Felicidades! :D");
+			}
+			else {
+				System.out.println("Fallaste :( Eres una deshonra a toda tu familia");
+			}
+			
+			System.out.println("¿Quieres jugar de nuevo? Si o no");
+			jugar = (input.nextLine()).toLowerCase();
+			
+		}
+		
+		System.out.print("Hasta Luego");
+
+
+	}
+	
+	public static void CrearPersonajesNR() {
+		for(int i = 0; i < matrizPersonajes.length; i++) {
+			Personaje a = new Personaje();
+			matrizPersonajes[i][0] = a.getNombre() + ":";
+			matrizPersonajes[i][1] = a.getEsBellako() + ", ";
+			matrizPersonajes[i][2] = a.getTomaKittyChelas() + ", ";
+			matrizPersonajes[i][3] = a.getEsFanDeChayan() + ", ";
+			matrizPersonajes[i][4] = a.getLeGustaElMambo();
+			if(i != 0) {
+				while (EsRepetido(matrizPersonajes, i)) {
+					a.setEsBellako();
+					a.setTomaKittyChelas();
+					a.setEsFanDeChayan();
+					a.setLeGustaElMambo();
+					matrizPersonajes[i][0] = a.getNombre() + ":";
+					matrizPersonajes[i][1] = a.getEsBellako() + ", ";
+					matrizPersonajes[i][2] = a.getTomaKittyChelas() + ", ";
+					matrizPersonajes[i][3] = a.getEsFanDeChayan() + ", ";
+					matrizPersonajes[i][4] = a.getLeGustaElMambo();
+				}
+				matrizPersonajes[i][1] = a.getEsBellako() + ", ";
+				matrizPersonajes[i][2] = a.getTomaKittyChelas() + ", ";
+				matrizPersonajes[i][3] = a.getEsFanDeChayan() + ", ";
+				matrizPersonajes[i][4] = a.getLeGustaElMambo();
+			}
+			else {
+				matrizPersonajes[i][1] = a.getEsBellako() + ", ";
+				matrizPersonajes[i][2] = a.getTomaKittyChelas() + ", ";
+				matrizPersonajes[i][3] = a.getEsFanDeChayan() + ", ";
+				matrizPersonajes[i][4] = a.getLeGustaElMambo();
+			}
+		}
+	}
+	
+	public static boolean EsRepetido(String[][] m, int i) {
+		int contador;
+			for(int k = 0; k < i; k++) {
+				contador = 4;
+				for(int l = 1; l < 5; l++) {
+					if(m[i][l] == m[k][l]) {
+						contador = contador - 1;
+						if(contador == 0) {
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+	}
+	
+	
+	public static void ImprimirPersonajes() {
+		for(int i = 0; i < matrizPersonajes.length; i++) {
+			for(int j = 0; j < matrizPersonajes[i].length; j++) {
+				System.out.print(matrizPersonajes[i][j] + " ");
+			}
+			System.out.println(" ");
+		}
+		System.out.print("\n");
+		
+	}
+	
+	public static void ImprimirPreguntas() {
+		for(int i = 0; i < preguntas.length; i++) {
+			System.out.println(preguntas[i]);
+		}
+	}
+	
+	public static void eliminarPersonajes(int i) {
+		
+		for(int fila = 0; fila < matrizPersonajes.length; fila++) {
+			if(matrizPersonajes[pRandom][i].equals(matrizPersonajes[fila][i])) {
+				continue;
+			}
+			else {
+				for(int columnas = 1; columnas < matrizPersonajes[fila].length; columnas++) {
+					matrizPersonajes[fila][columnas] = "";
+				}
+			}
+		}
+
+	}	
+	
+}
