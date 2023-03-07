@@ -1,0 +1,60 @@
+import java.util.Random;
+import java.util.Stack;
+public class Personaje extends Persona {
+	Random random = new Random();
+	
+	String[] nombres = new String[] {"Hello Kitty", "Snoopy", "Danny Phantom", "Toothless", "Perry", "Cinnamonroll", "Dick Grayson", "Kim Possible", "Sheego", "Hiccup"};
+	String[] bellako = new String[] {"Es bellako/a", "No es bellako/a"};
+	String[] tomaKitty = new String[] {"Toma Kitty chelas", "No toma Kitty chelas"};
+	String[] chayanator = new String[] {"Es fan de Chayan", "No es fan de Chayan"};
+	String[] mambo = new String[] {"Le gusta el mambo", "No le gusta el mambo"};
+	
+	static Stack <Integer> numRandomNom = new Stack <Integer> ();
+	static Stack <Integer> numRandomAtributo = new Stack <Integer> ();
+	static int ran;
+	static int ranAtri;
+	
+	public Personaje() {
+		super.setNombre(nombres[AleatorioSR()]);		
+		setEsBellako();
+		setTomaKittyChelas();
+		setEsFanDeChayan();
+		setLeGustaElMambo();
+	}
+	
+	public String toString() {
+		return super.getNombre() + ": " + super.getEsBellako()+ ", " + super.getTomaKittyChelas() + ", " + super.getEsFanDeChayan() + ", " + super.getLeGustaElMambo() + "\n";
+	}
+	
+	private static int AleatorioSR() {
+		ran = (int) Math.floor(Math.random() * 10);
+		while(numRandomNom.contains(ran)) {
+			ran = (int) Math.floor(Math.random() * 10);
+		}
+		numRandomNom.push(ran);
+		return ran;
+	}
+	
+	private static int AleatorioAtributos() {
+		ranAtri = (int) Math.floor(Math.random() * 2);
+		return ranAtri;
+	}
+	
+	public void setEsBellako() {
+		this.esBellako = bellako[AleatorioAtributos()];
+	}
+	
+	public void setTomaKittyChelas() {
+		this.tomaKittyChelas = tomaKitty[AleatorioAtributos()];
+	}
+	
+	public void setEsFanDeChayan() {
+		this.esFanDeChayan = chayanator[AleatorioAtributos()];
+	}
+	
+	public void setLeGustaElMambo() {
+		this.leGustaElMambo = mambo[AleatorioAtributos()];
+	}
+	
+
+}
