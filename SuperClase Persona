@@ -1,0 +1,55 @@
+
+public abstract class Persona {
+	
+	public String nombre;
+	public String esBellako;
+	public String tomaKittyChelas;
+	public String esFanDeChayan;
+	public String leGustaElMambo;
+	
+	public Persona() {
+		
+	}
+
+	protected String getNombre() {
+		return nombre;
+	}
+	
+	protected void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	protected String getEsBellako() {
+		return esBellako;
+	}
+	
+	protected void setEsBellako(String esBellako) {
+		this.esBellako = esBellako;
+	}
+	
+	protected String getTomaKittyChelas() {
+		return tomaKittyChelas;
+	}
+	
+	protected void setTomaKittyChelas(String tomaKittyChelas) {
+		this.tomaKittyChelas = tomaKittyChelas;
+	}
+	
+	protected String getEsFanDeChayan() {
+		return esFanDeChayan;
+	}
+	
+	protected void setEsFanDeChayan(String esFanDeChayan) {
+		this.esFanDeChayan = esFanDeChayan;
+	}
+	
+	protected String getLeGustaElMambo() {
+		return leGustaElMambo;
+	}
+	
+	protected void setLeGustaElMambo(String leGustaElMambo) {
+		this.leGustaElMambo = leGustaElMambo;
+	}
+
+
+}
