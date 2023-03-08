@@ -13,6 +13,7 @@ public class Personaje extends Persona {
 	static Stack <Integer> numRandomAtributo = new Stack <Integer> ();
 	static int ran;
 	static int ranAtri;
+	static int contador;
 	
 	public Personaje() {
 		super.setNombre(nombres[AleatorioSR()]);		
@@ -27,12 +28,27 @@ public class Personaje extends Persona {
 	}
 	
 	private static int AleatorioSR() {
-		ran = (int) Math.floor(Math.random() * 10);
-		while(numRandomNom.contains(ran)) {
+		if(contador < 10) {
 			ran = (int) Math.floor(Math.random() * 10);
+			while(numRandomNom.contains(ran)) {
+				ran = (int) Math.floor(Math.random() * 10);
+			}
+			numRandomNom.push(ran);
+			contador++;
+			return ran;
 		}
-		numRandomNom.push(ran);
-		return ran;
+		else {
+			numRandomNom.clear();
+			contador = 0;
+			ran = (int) Math.floor(Math.random() * 10);
+			while(numRandomNom.contains(ran)) {
+				ran = (int) Math.floor(Math.random() * 10);
+			}
+			numRandomNom.push(ran);
+			contador++;
+			return ran;
+		}
+		
 	}
 	
 	private static int AleatorioAtributos() {
